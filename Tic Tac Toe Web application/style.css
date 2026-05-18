@@ -1,0 +1,193 @@
+:root {
+    --bg-color: #0f172a;
+    --text-color: #f8fafc;
+    --primary: #3b82f6;
+    --secondary: #8b5cf6;
+    --board-bg: rgba(255, 255, 255, 0.05);
+    --cell-bg: rgba(255, 255, 255, 0.05);
+    --cell-hover: rgba(255, 255, 255, 0.1);
+    --x-color: #38bdf8;
+    --o-color: #c084fc;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.2), transparent 40%),
+                      radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.2), transparent 40%);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.mode-selection {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    border-radius: 12px;
+}
+
+.mode-selection button {
+    flex: 1;
+    background: transparent;
+    color: var(--text-color);
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-selection button.active {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.mode-selection button:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.status {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    height: 30px;
+}
+
+#message {
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    background: var(--board-bg);
+    padding: 10px;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background: var(--cell-bg);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+@media (max-width: 400px) {
+    .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 2.8rem;
+    }
+}
+
+.cell:hover {
+    background: var(--cell-hover);
+    transform: scale(1.02);
+}
+
+.cell.x {
+    color: var(--x-color);
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cell.o {
+    color: var(--o-color);
+    text-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.controls {
+    text-align: center;
+    width: 100%;
+}
+
+#reset-btn {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    max-width: 200px;
+}
+
+#reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(139, 92, 246, 0.5);
+}
+
+#reset-btn:active {
+    transform: translateY(0);
+}
